@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34714.143
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebBooks", "WebBooks\WebBooks.csproj", "{639D1287-8213-4226-8F0E-049FEF16F769}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebBooks", "WebBooks\WebBooks.csproj", "{639D1287-8213-4226-8F0E-049FEF16F769}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebBooksRazor_Temp", "WebBooksRazor_Temp\WebBooksRazor_Temp.csproj", "{D5C09993-D091-47FA-B3C6-BAFE884F0450}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{639D1287-8213-4226-8F0E-049FEF16F769}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{639D1287-8213-4226-8F0E-049FEF16F769}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{639D1287-8213-4226-8F0E-049FEF16F769}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5C09993-D091-47FA-B3C6-BAFE884F0450}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5C09993-D091-47FA-B3C6-BAFE884F0450}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5C09993-D091-47FA-B3C6-BAFE884F0450}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5C09993-D091-47FA-B3C6-BAFE884F0450}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
