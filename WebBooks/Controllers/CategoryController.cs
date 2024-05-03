@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebBooks.Data;
+using WebBooks.Models;
 
 namespace WebBooks.Controllers
 {
@@ -9,12 +10,35 @@ namespace WebBooks.Controllers
         public CategoryController(ApplicationDbContext db)
         {
             _db = db;
-            
+
         }
         public IActionResult Index()
         {
             var objCategoryList = _db.Categories.ToList();
             return View(objCategoryList);
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Category obj)
+        {
+            //if(obj.Name == obj.DisplayOrder.ToString())
+            //{
+            //    ModelState.AddModelError("Name", "The Display Order cannot exactly match the Name");
+            //}
+
+            if (ModelState.IsValid)
+            {
+                _db.Categories.Add(obj);
+                _db.SaveChanges();
+            return RedirectToAction("Index", "Category");
+            }
+
+            return View();
         }
     }
 }
