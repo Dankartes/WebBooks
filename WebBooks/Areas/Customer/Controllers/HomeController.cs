@@ -2,8 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using WebBooks.Models;
 
-namespace WebBooks.Controllers
+namespace WebBooks.Areas.Customer.Controllers
 {
+    [Area("Customer")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

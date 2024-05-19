@@ -3,8 +3,9 @@ using WebBooks.DataAccess.Data;
 using WebBooks.DataAccess.Repository.IRepository;
 using WebBooks.Models;
 
-namespace WebBooks.Controllers
+namespace WebBooks.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
