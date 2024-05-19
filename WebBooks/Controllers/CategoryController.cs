@@ -7,15 +7,15 @@ namespace WebBooks.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ICategoryRepository _categoryRepository;
-        public CategoryController(ICategoryRepository categoryRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        public CategoryController(IUnitOfWork unitOfWork)
         {
-            _categoryRepository = categoryRepository;
+            _unitOfWork = unitOfWork;
 
         }
         public IActionResult Index()
         {
-            var objCategoryList = _categoryRepository.GetAll();
+            var objCategoryList = _unitOfWork.Category.GetAll();
             return View(objCategoryList);
         }
 
@@ -34,8 +34,8 @@ namespace WebBooks.Controllers
 
             if (ModelState.IsValid)
             {
-                _categoryRepository.Add(obj);
-                _categoryRepository.Save();
+                _unitOfWork.Category.Add(obj);
+                _unitOfWork.Category.Save();
                 TempData["success"] = "Category created successfully";
                 return RedirectToAction("Index", "Category");
             }
@@ -50,7 +50,7 @@ namespace WebBooks.Controllers
                 return NotFound();
             }
 
-            Category? category = _categoryRepository.Get(c => c.Id == id);
+            Category? category = _unitOfWork.Category.Get(c => c.Id == id);
             //Category? category1 = _db.Categories.FirstOrDefault(u => u.Id == id);
             //Category? category2 = _db.Categories.Where(u => u.Id == id).FirstOrDefault();
 
@@ -68,8 +68,8 @@ namespace WebBooks.Controllers
 
             if (ModelState.IsValid)
             {
-                _categoryRepository.Update(obj);
-                _categoryRepository.Save();
+                _unitOfWork.Category.Update(obj);
+                _unitOfWork.Save();
                 TempData["success"] = "Category updated successfully";
                 return RedirectToAction("Index", "Category");
             }
@@ -86,7 +86,7 @@ namespace WebBooks.Controllers
                 return NotFound();
             }
 
-            Category? category = _categoryRepository.Get(c => c.Id == id);
+            Category? category = _unitOfWork.Category.Get(c => c.Id == id);
             //Category? category1 = _db.Categories.FirstOrDefault(u => u.Id == id);
             //Category? category2 = _db.Categories.Where(u => u.Id == id).FirstOrDefault();
 
@@ -101,15 +101,15 @@ namespace WebBooks.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeletePOST(int? id)
         {
-            Category? category = _categoryRepository.Get(c => c.Id == id);
+            Category? category = _unitOfWork.Category.Get(c => c.Id == id);
 
             if (category == null)
             {
                 return NotFound();
             }
 
-            _categoryRepository.Remove(category);
-            _categoryRepository.Save();
+            _unitOfWork.Category.Remove(category);
+            _unitOfWork.Save();
             TempData["success"] = "Category deleted successfully";
             return RedirectToAction("Index");
         }
