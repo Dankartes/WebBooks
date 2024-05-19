@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebBooks.Models;
 
-namespace WebBooks.Data
+namespace WebBooks.DataAccess.Data
 {
     public class ApplicationDbContext : DbContext
     {
