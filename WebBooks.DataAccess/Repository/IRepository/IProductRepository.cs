@@ -11,6 +11,5 @@ namespace WebBooks.DataAccess.Repository.IRepository
     {
         void Update(Product product);
 
-        void Save();
     }
 }
