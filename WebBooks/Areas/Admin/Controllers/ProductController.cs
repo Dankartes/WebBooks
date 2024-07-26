@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using WebBooks.DataAccess.Repository.IRepository;
 using WebBooks.Models;
 
@@ -16,19 +17,26 @@ namespace WebBooks.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            var objProductList = _unitOfWork.Product.GetAll();
+            var objProductList = _unitOfWork.Product.GetAll().ToList();
             return View(objProductList);
         }
 
-        public IActionResult Create() 
+        public IActionResult Create()
         {
+            IEnumerable<SelectListItem> categoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+            {
+                Text = u.Name,
+                Value = u.Id.ToString()
+            });
+            // ViewBag.CategoryList = categoryList;
+            ViewData["CategoryList"] = categoryList;
             return View();
         }
 
         [HttpPost]
         public IActionResult Create(Product obj)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _unitOfWork.Product.Add(obj);
                 _unitOfWork.Save();
@@ -41,7 +49,7 @@ namespace WebBooks.Areas.Admin.Controllers
 
         public IActionResult Edit(int? id)
         {
-            if(id == 0 || id == null)
+            if (id == 0 || id == null)
                 return NotFound();
 
             Product product = _unitOfWork.Product.Get(product => product.Id == id);
@@ -63,14 +71,15 @@ namespace WebBooks.Areas.Admin.Controllers
                 TempData["success"] = "Product updated successfully";
                 return RedirectToAction("Index", "Product");
             }
+
             return View();
         }
 
         public IActionResult Delete(int id)
         {
-            if(id == 0 ) return NotFound();
+            if (id == 0) return NotFound();
 
-            Product product = _unitOfWork.Product.Get(product => product.Id==id);
+            Product product = _unitOfWork.Product.Get(product => product.Id == id);
 
             if (product == null) return NotFound();
 
@@ -90,7 +99,6 @@ namespace WebBooks.Areas.Admin.Controllers
             _unitOfWork.Save();
             TempData["success"] = "Product deleted successfully";
             return RedirectToAction("Index", "Product");
-
         }
     }
 }

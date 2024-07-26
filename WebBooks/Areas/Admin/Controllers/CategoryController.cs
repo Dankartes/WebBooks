@@ -9,11 +9,12 @@ namespace WebBooks.Areas.Admin.Controllers
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+
         public CategoryController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-
         }
+
         public IActionResult Index()
         {
             var objCategoryList = _unitOfWork.Category.GetAll();
@@ -66,7 +67,6 @@ namespace WebBooks.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Edit(Category obj)
         {
-
             if (ModelState.IsValid)
             {
                 _unitOfWork.Category.Update(obj);
@@ -77,7 +77,6 @@ namespace WebBooks.Areas.Admin.Controllers
 
             return View();
         }
-
 
 
         public IActionResult Delete(int? id)
