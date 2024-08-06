@@ -20,7 +20,22 @@ namespace WebBooks.DataAccess.Repository
 
         public void Update(Product product)
         {
-            _db.Products.Update(product);
+            var dbProduct = _db.Products.FirstOrDefault(p => p.Id == product.Id);
+
+            if (dbProduct != null)
+            {
+                dbProduct.Title = product.Title;
+                dbProduct.Description = product.Description;
+                dbProduct.ISBN = product.ISBN;
+                dbProduct.Author = product.Author;
+                dbProduct.ListPrice = product.ListPrice;
+                dbProduct.Price = product.Price;
+                dbProduct.Price50 = product.Price50;
+                dbProduct.Price100 = product.Price100;
+                dbProduct.CategoryId = product.CategoryId;
+                if (dbProduct.ImageUrl != null)
+                    dbProduct.ImageUrl = product.ImageUrl;
+            }
         }
     }
 }
