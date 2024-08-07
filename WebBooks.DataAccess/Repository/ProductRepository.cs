@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using WebBooks.DataAccess.Data;
 using WebBooks.DataAccess.Repository.IRepository;
 using WebBooks.Models;
@@ -16,6 +17,7 @@ namespace WebBooks.DataAccess.Repository
         public ProductRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
+            _db.Products.Include(p => p.Category).Include(p => p.CategoryId);
         }
 
         public void Update(Product product)

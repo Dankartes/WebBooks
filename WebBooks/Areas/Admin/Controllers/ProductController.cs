@@ -20,7 +20,7 @@ namespace WebBooks.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            var objProductList = _unitOfWork.Product.GetAll().ToList();
+            var objProductList = _unitOfWork.Product.GetAll("Category").ToList();
             return View(objProductList);
         }
 
